@@ -24,9 +24,3 @@ RSpec.configure do |config|
     DB.transaction(:rollback=>:always){example.run}
   end
 end
-
-# require 'capybara/rspec'
-# Capybara.configure do |config|
-#   config.app = Axess::API
-#   config.server_port = 9293
-# end
