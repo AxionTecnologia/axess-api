@@ -10,4 +10,4 @@ database:
 
 test:
   post:
-    - ln -s coverage $CIRCLE_ARTIFACTS
+    - mv coverage $CIRCLE_ARTIFACTS
