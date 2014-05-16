@@ -10,6 +10,7 @@ SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
 SimpleCov.start do
   add_filter "/config/"
   add_filter "/spec/"
+  add_filter "/vendor/"
 end
 
 require File.expand_path("../../config/environment", __FILE__)
