@@ -1,0 +1,5 @@
+database:
+  override:
+    # replace CircleCI's generated database.yml
+    - cp config/database.yml.copyme config/database.yml
+    - bundle exec rake db:migrate
