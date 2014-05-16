@@ -7,7 +7,7 @@ require 'simplecov'
 require 'simplecov-rcov'
 require 'grape/rabl'
 SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
-
+SimpleCov.coverage_dir ENV["CIRCLE_ARTIFACTS"]
 SimpleCov.start do
   add_filter "/config/"
   add_filter "/spec/"
