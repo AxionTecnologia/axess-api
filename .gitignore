@@ -1,5 +1,9 @@
 *.gem
 *.rbc
+config/database.yml
+db/development.sqlite
+db/test.sqlite
+/log/
 /.config
 /coverage/
 /InstalledFiles
