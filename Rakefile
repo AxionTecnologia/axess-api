@@ -15,7 +15,6 @@ require 'rspec/core'
 require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new(:spec) do |spec|
-  # do not run integration tests, doesn't work on TravisCI
   spec.pattern = FileList[
     'spec/api/*_spec.rb',
     'spec/integration/*_spec.rb',
@@ -25,33 +24,49 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
   ]
 end
 
+def load_env
+  env_loaded = require_relative "config/environment"
+  if env_loaded
+    Sequel.extension :migration
+    puts "#{ENV['RACK_ENV']} environment loaded!"
+  end
+end
+
 task :default => :spec
+task :c => :console
+
+task :console do
+  ENV['RACK_ENV'] = 'development'
+  load_env
+  require 'pry'
+  ARGV.clear
+  Pry.start
+end
 
 namespace :db do
-  ENV['RACK_ENV'] = ENV['env']
-  require_relative "config/environment"
 
-
-  Sequel.extension :migration
   MIGRATIONS_PATH = "db/migrations"
 
   desc "Prints current schema version"
   task :version do
+    load_env
     version = if DB.tables.include?(:schema_info)
       DB[:schema_info].first[:version]
     end || 0
 
-    puts "Schema Version: #{version}"
+    puts "Schema version: #{version}"
   end
 
   desc "Perform migration up to latest migration available"
   task :migrate do
+    load_env
     Sequel::Migrator.run(DB, MIGRATIONS_PATH)
     Rake::Task['db:version'].execute
   end
 
   desc "Perform rollback to specified target or full rollback as default"
   task :rollback, :target do |t, args|
+    load_env
     args.with_defaults(:target => 0)
 
     Sequel::Migrator.run(DB, MIGRATIONS_PATH, :target => args[:target].to_i)
@@ -60,6 +75,7 @@ namespace :db do
 
   desc "Perform migration reset (full rollback and migration)"
   task :reset do
+    load_env
     Sequel::Migrator.run(DB, MIGRATIONS_PATH, :target => 0)
     Sequel::Migrator.run(DB, MIGRATIONS_PATH)
     Rake::Task['db:version'].execute
@@ -67,6 +83,8 @@ namespace :db do
 
   desc "Seeds a database with fixture data"#FIXME: should take always development db
   task :seed do
+    ENV['RACK_ENV'] = 'development'
+    load_env
     begin
       employee = Fabricate(:employee)
       Fabricate(:employee, rut: 13045674, name: "Claudia")
