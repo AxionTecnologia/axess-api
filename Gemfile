@@ -18,7 +18,7 @@ group :test do
   gem 'rspec'
   gem 'rspec-mocks'
   gem 'rack-test'
-  gem 'simplecov'
+  gem 'simplecov', '~> 0.7.1'
   gem 'simplecov-rcov'
 end
 

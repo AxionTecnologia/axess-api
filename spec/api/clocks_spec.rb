@@ -21,7 +21,7 @@ describe Axess::API do
     Fabricate.build(
       :clock,
       employee: employee,
-      clock_in: DateTime.new(2014,2,3,1,5,6)
+      clock_in: DateTime.new(2014,2,3,1,5,6,'-3')
     )
   end
 
@@ -29,8 +29,8 @@ describe Axess::API do
     Fabricate.build(
       :clock,
       employee: employee,
-      clock_in: DateTime.new(2014,2,3,1,5,6),
-      clock_out: DateTime.new(2014,2,3,3,5,6)
+      clock_in: DateTime.new(2014,2,3,1,5,6,'-3'),
+      clock_out: DateTime.new(2014,2,3,3,5,6,'-3')
     )
   end
 
@@ -70,7 +70,7 @@ describe Axess::API do
       last_response.status.should == Rack::Utils.status_code(:created)
       last_response.body.should == {"clock"=>{
         "event" => "clock-in",
-        "timestamp" => "2014-02-02 22:05:06 -0300"
+        "timestamp" => "2014-02-03 01:05:06 -0300"
         }}.to_json
     end
 
@@ -83,7 +83,7 @@ describe Axess::API do
       last_response.status.should == Rack::Utils.status_code(:created)
       last_response.body.should == {"clock"=>{
         "event" => "clock-out",
-        "timestamp" => "2014-02-03 00:05:06 -0300"
+        "timestamp" => "2014-02-03 03:05:06 -0300"
         }}.to_json
     end
 
