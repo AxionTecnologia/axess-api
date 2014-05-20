@@ -6,15 +6,22 @@ require 'rack/test'
 require 'simplecov'
 require 'simplecov-rcov'
 require 'grape/rabl'
-SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
+
+require 'coveralls'
+Coveralls.wear!
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::RcovFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+
 SimpleCov.start do
   add_filter "/config/"
   add_filter "/spec/"
   add_filter "/vendor/"
 end
 
-require 'coveralls'
-Coveralls.wear!('rails')
+
 
 require File.expand_path("../../config/environment", __FILE__)
 
