@@ -13,6 +13,9 @@ SimpleCov.start do
   add_filter "/vendor/"
 end
 
+require 'coveralls'
+Coveralls.wear!('rails')
+
 require File.expand_path("../../config/environment", __FILE__)
 
 
