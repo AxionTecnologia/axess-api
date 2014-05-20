@@ -39,10 +39,7 @@ module EmployeeAPI
       put '/', rabl: 'empty' do
         employee = Employee[params[:id]] or error!('Record could not be found', 401)
         begin
-          employee.name = params[:name] unless params[:name].nil?
-          employee.last_name = params[:last_name] unless params[:last_name].nil?
-          employee.active = params[:active] unless params[:active].nil?
-          employee.save
+          employee.update params.pick(:name, :last_name, :active)
         rescue Sequel::ValidationFailed => e
           error!(e, 402)
         end
