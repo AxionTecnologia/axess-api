@@ -10,8 +10,8 @@ require 'grape/rabl'
 require 'coveralls'
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-  SimpleCov::Formatter::RcovFormatter,
-  Coveralls::SimpleCov::Formatter
+  Coveralls::SimpleCov::Formatter,
+  SimpleCov::Formatter::RcovFormatter
 ]
 
 SimpleCov.start do
