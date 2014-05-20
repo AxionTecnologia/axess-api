@@ -8,7 +8,6 @@ require 'simplecov-rcov'
 require 'grape/rabl'
 
 require 'coveralls'
-Coveralls.wear!
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   SimpleCov::Formatter::RcovFormatter,
