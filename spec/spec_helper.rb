@@ -6,7 +6,6 @@ require 'rack/test'
 require 'simplecov'
 require 'simplecov-rcov'
 require 'grape/rabl'
-
 require 'coveralls'
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
