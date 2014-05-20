@@ -11,4 +11,3 @@ database:
 test:
   post:
     - mv coverage $CIRCLE_ARTIFACTS
-    - coveralls
