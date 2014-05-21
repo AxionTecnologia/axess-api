@@ -89,6 +89,7 @@ namespace :db do
       employee = Fabricate(:employee)
       Fabricate(:employee, rut: 13045674, name: "Claudia")
       Fabricate(:clock, employee: employee)
+      Fabricate(:clock, employee: employee, clock_out: (DateTime.now + (8 * 60 * 60)), total_hours:8)
       puts "Data generated."
     rescue
       puts "Data looks stale, you may want to run rake db:reset first."

@@ -10,7 +10,7 @@ module EmployeeAPI
 
       desc "Lists the employees."
       get '/', rabl: 'employees/index' do
-        @employees = Employee.by_active.map{ |e| EmployeePresenter.new e }
+        @employees = Employee.by_active.map{ |e| Presenter::Employee.new e }
       end
 
       desc "Creates an employee."

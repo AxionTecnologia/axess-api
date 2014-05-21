@@ -7,6 +7,7 @@ gem 'sequel'
 gem 'thin'
 gem 'grape-swagger'
 gem 'oj'
+gem 'erubis'
 
 group :development do
   gem 'rake'

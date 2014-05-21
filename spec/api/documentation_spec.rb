@@ -11,7 +11,7 @@ describe Axess::API do
     last_response.status.should == 200
     json_response = JSON.parse last_response.body
     json_response["apiVersion"].should == "v1"
-    json_response["apis"].size.should == 3
+    json_response["apis"].size.should == 4
   end
 
 end

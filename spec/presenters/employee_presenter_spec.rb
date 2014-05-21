@@ -3,10 +3,10 @@
 
 require 'spec_helper'
 
-describe EmployeePresenter do
+describe Presenter::Employee do
 
   before do
-    @employee = EmployeePresenter.new Fabricate.build :employee
+    @employee = Presenter::Employee.new Fabricate.build :employee
   end
 
   context "#rut" do

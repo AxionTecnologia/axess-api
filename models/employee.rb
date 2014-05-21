@@ -21,5 +21,18 @@ class Employee < Sequel::Model
       where(rut: rut).first
     end
 
+    def monthly_data(opts)
+      eager_graph(:clocks).
+      where{Sequel.&(
+        clocks__clock_in.extract(:month) => opts[:month],
+        clocks__clock_in.extract(:year) => opts[:year]
+      )}
+
+    end
+
+    def monthly_data_by_employee(opts)
+      monthly_data(opts).where(employee_id: opts[:employee_id]).all.first
+    end
+
   end
 end

@@ -16,7 +16,7 @@ module ClockAPI
         rut, cv = Validator::Rut::sanitize_rut params[:employee_rut]
         employee = Employee.by_rut rut
         if employee
-          @clock = ClockPresenter.new Clock.tick employee.id
+          @clock = Presenter::Clock.new Clock.tick employee.id
         else
           error!('Not a valid employee rut', 400)
         end

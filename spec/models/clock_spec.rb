@@ -14,42 +14,6 @@ describe Clock do
     DateTime.new 2014,2,3,3,5,6
   end
 
-  context "#monthly_data" do
-
-    before do
-      Fabricate(:clock, clock_in: clock_in, employee: employee)
-    end
-
-    it "returns a data list" do
-      data = Clock.monthly_data ({month: 2, year: 2014})
-      data.count.should be 1
-    end
-
-    it "returns an empty dataset when no data is found" do
-      data = Clock.monthly_data ({month: 2, year: 2015})
-      data.count.should be 0
-    end
-
-  end
-
-  context "#employee_monthly_data" do
-
-    before do
-      Fabricate(:clock, clock_in: clock_in, employee: employee)
-    end
-
-    it "returns an employee data list" do
-      data = Clock.employee_monthly_data ({month: 2, year: 2014, employee_id: employee.id})
-      data.count.should be 1
-    end
-
-    it "returns an empty dataset when no employee data is found" do
-      data = Clock.employee_monthly_data ({month: 2, year: 2014, employee_id: 2})
-      data.count.should be 0
-    end
-
-  end
-
   context "#tick" do
 
     context "when shift starts" do
