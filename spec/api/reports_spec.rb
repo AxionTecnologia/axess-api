@@ -58,10 +58,42 @@ describe ReportAPI::V1 do
     <th>TOTAL HORAS</th>
   </thead>
     <tr>
-      <td>01:06:09</td>
+      <td>03/07/2014</td>
       <td>01:06:09</td>
       <td>05:05:02</td>
       <td>4</td>
+    </tr>
+</table>
+}
+    end
+
+  end
+
+  describe "GET /api/v1/reports/monthly.xls" do
+
+    it "returns a monthly report of an employee" do
+      Employee.should_receive(:monthly_data).and_return Sequel::SQLite::Dataset.new employee
+      Sequel::SQLite::Dataset.any_instance.should_receive(:all).and_return [employee]
+      Presenter::Employee.any_instance.stub(:employee_presenter)
+      get "/api/v1/reports/monthly.xls",{
+        month: 4,
+        year: 2014
+        },{'api.tilt.root' => rabl_root}
+
+      last_response.status.should == Rack::Utils.status_code(:ok)
+      last_response.body.should == \
+%Q{<table border="1">
+  <thead>
+    <th>RUT</th>
+    <th>NOMBRE</th>
+    <th>TOTAL DIAS</th>
+    <th>TOTAL HORAS</th>
+  </thead>
+    <tr>
+      <td>16.056.807-0</td>
+      <td>Andrés Otárola Alvarado</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
 </table>
 }

@@ -4,7 +4,7 @@ class Employee < Sequel::Model
 
   raise_on_save_failure
 
-  one_to_many :clocks
+  one_to_many :clocks, order: :clock_in
 
   def validate
     super

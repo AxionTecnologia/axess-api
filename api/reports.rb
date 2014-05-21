@@ -4,7 +4,6 @@
 module ReportAPI
   class V1 < Grape::API
     version 'v1', using: :path, vendor: 'Axion Tecnología'
-    content_type :json, "application/json;charset=UTF-8"
     content_type :xls, "application/vnd.ms-excel"
     formatter :xls, XlsFormatter
 
@@ -17,8 +16,8 @@ module ReportAPI
           requires :month, type: Integer, desc: "Month."
           requires :year, type: Integer, desc: "Year."
         end
-        post '/', xls: 'reports/monthly' do
-          @report = Employee.monthly_data(params).map{ |e| Presenter::Employee.new e }
+        get '/', xls: 'reports/monthly' do
+          @report = Employee.monthly_data(params).all.map{ |e| Presenter::Employee.new e }
         end
 
         desc "Generates employee monthly report."

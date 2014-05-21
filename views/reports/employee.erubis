@@ -7,7 +7,7 @@
   </thead>
     <% for clock in object[:clocks] %>
     <tr>
-      <td><%= clock.clock_in %></td>
+      <td><%= clock.date_in %></td>
       <td><%= clock.clock_in %></td>
       <td><%= clock.clock_out %></td>
       <td><%= clock.total_hours %></td>
