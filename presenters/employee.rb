@@ -18,14 +18,6 @@ module Presenter
       @employee.name
     end
 
-    def total_days_worked
-      @employee.clocks.count
-    end
-
-    def total_hours
-      @employee.clocks.select{|h| h.total_hours }.inject(0) {|sum, hash| sum + hash[:total_hours] }
-    end
-
     def last_name
       @employee.last_name
     end
@@ -34,8 +26,16 @@ module Presenter
       "#{name} #{last_name}"
     end
 
-    def active
+    def is_active?
       @employee.active
+    end
+
+    def total_days_worked
+      @employee.clocks.count
+    end
+
+    def total_hours
+      @employee.clocks.select{|h| h.total_hours }.inject(0) {|sum, hash| sum + hash[:total_hours] }
     end
 
   end

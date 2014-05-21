@@ -38,7 +38,7 @@ describe Axess::API do
           'rut' => '16.056.807-0',
           'name' => 'Andrés',
           'last_name' => 'Otárola Alvarado',
-          'active' => true
+          'is_active?' => true
       }]}.to_json
     end
   end
