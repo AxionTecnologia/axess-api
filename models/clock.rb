@@ -17,6 +17,21 @@ class Clock < Sequel::Model
       clock
     end
 
+    def monthly_data(opts)
+      where{Sequel.&(
+        clock_in.extract(:month) => opts[:month],
+        clock_in.extract(:year) => opts[:year]
+      )}
+    end
+
+    def employee_monthly_data(opts)
+      where{Sequel.&(
+        employee_id => opts[:employee_id],
+        clock_in.extract(:month) => opts[:month],
+        clock_in.extract(:year) => opts[:year]
+      )}
+    end
+
   end
 
 end
