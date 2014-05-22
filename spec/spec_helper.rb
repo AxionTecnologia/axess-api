@@ -6,7 +6,13 @@ require 'rack/test'
 require 'simplecov'
 require 'simplecov-rcov'
 require 'grape/rabl'
-SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
+require 'coveralls'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  Coveralls::SimpleCov::Formatter,
+  SimpleCov::Formatter::RcovFormatter
+]
+
 SimpleCov.start do
   add_filter "/config/"
   add_filter "/spec/"

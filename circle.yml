@@ -7,7 +7,3 @@ database:
     # replace CircleCI's generated database.yml
     - cp config/database.yml.copyme config/database.yml
     - bundle exec rake db:migrate
-
-test:
-  post:
-    - mv coverage $CIRCLE_ARTIFACTS

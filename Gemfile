@@ -25,4 +25,5 @@ end
 
 group :test, :development do
   gem 'sqlite3'
+  gem 'coveralls', require: false
 end
