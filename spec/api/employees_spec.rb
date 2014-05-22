@@ -3,10 +3,10 @@
 
 require 'spec_helper'
 
-describe Axess::API do
+describe EmployeeAPI::V1 do
 
   def app
-    Axess::API
+    EmployeeAPI::V1
   end
 
   let(:rabl_root) do
@@ -80,9 +80,9 @@ describe Axess::API do
       Fabricate.build(:employee)
     }
 
-    it "returns 200 for a created employee" do
+    it "returns 200 for a updated employee" do
       Employee.should_receive(:[]).and_return employee
-      Employee.any_instance.should_receive(:save).and_return employee
+      Employee.any_instance.should_receive(:update).and_return employee
       put "/api/v1/employees",{
         id: 1,
         rut: "16.056.807-0",
@@ -112,7 +112,7 @@ describe Axess::API do
 
     it "returns 402 for a employee update attempt" do
       Employee.should_receive(:[]).and_return employee
-      Employee.any_instance.should_receive(:save).and_raise(Sequel::ValidationFailed.new 'Record could not be updated')
+      Employee.any_instance.should_receive(:update).and_raise(Sequel::ValidationFailed.new 'Record could not be updated')
       put "/api/v1/employees",{
         id: 1,
         rut: "16.056.807-0",

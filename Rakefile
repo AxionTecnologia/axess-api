@@ -20,6 +20,7 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
     'spec/integration/*_spec.rb',
     'spec/models/*_spec.rb',
     'spec/presenters/*_spec.rb',
+    'spec/utils/*_spec.rb',
     'spec/validators/*_spec.rb'
   ]
 end

@@ -25,7 +25,7 @@ DB = Sequel.connect db_config, db_options
 
 #Load all the basic scripts
 
-['api/validators','api/formatters','api','models','config/initializers', 'presenters'].each do |folder|
+['utils','api/formatters','api/validators','api','models','config/initializers', 'presenters'].each do |folder|
   Dir[File.expand_path(Project.join("#{folder}/*.rb"))].each do |f|
     require f
   end

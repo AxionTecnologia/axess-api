@@ -3,10 +3,10 @@
 
 require 'spec_helper'
 
-describe Axess::API do
+describe ClockAPI::V1 do
 
   def app
-    Axess::API
+    ClockAPI::V1
   end
 
   let(:rabl_root) do
