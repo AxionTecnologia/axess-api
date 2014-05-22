@@ -80,7 +80,7 @@ describe EmployeeAPI::V1 do
       Fabricate.build(:employee)
     }
 
-    it "returns 200 for a created employee" do
+    it "returns 200 for a updated employee" do
       Employee.should_receive(:[]).and_return employee
       Employee.any_instance.should_receive(:update).and_return employee
       put "/api/v1/employees",{
