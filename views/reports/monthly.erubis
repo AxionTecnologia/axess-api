@@ -1,0 +1,16 @@
+<table border="1">
+  <thead>
+    <th>RUT</th>
+    <th>NOMBRE</th>
+    <th>TOTAL DIAS</th>
+    <th>TOTAL HORAS</th>
+  </thead>
+    <% for employee in object %>
+    <tr>
+      <td><%= employee.rut %></td>
+      <td><%= employee.full_name %></td>
+      <td><%= employee.total_days_worked %></td>
+      <td><%= employee.total_hours %></td>
+    </tr>
+    <% end %>
+</table>

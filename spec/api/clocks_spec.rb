@@ -45,11 +45,11 @@ describe ClockAPI::V1 do
     end
 
     let(:clock_presenter) do
-      ClockPresenter.new new_clock
+      Presenter::Clock.new new_clock
     end
 
     let(:completed_clock_presenter) do
-      ClockPresenter.new completed_clock
+      Presenter::Clock.new completed_clock
     end
 
     it "returns a 400 for rut not found" do
@@ -64,7 +64,7 @@ describe ClockAPI::V1 do
     it "returns the created clock-in event" do
       Employee.should_receive(:by_rut).and_return employee
       Clock.should_receive(:tick).with(employee.id).and_return new_clock
-      ClockPresenter.any_instance.stub(:clock_presenter)
+      Presenter::Clock.any_instance.stub(:clock_presenter)
       post "/api/v1/clocks",{'employee_rut'=> employee_rut},{'api.tilt.root' => rabl_root}
 
       last_response.status.should == Rack::Utils.status_code(:created)
@@ -77,7 +77,7 @@ describe ClockAPI::V1 do
     it "returns the created clock-out event" do
       Employee.should_receive(:by_rut).and_return employee
       Clock.should_receive(:tick).and_return completed_clock
-      ClockPresenter.any_instance.stub(:completed_clock_presenter)
+      Presenter::Clock.any_instance.stub(:completed_clock_presenter)
       post "/api/v1/clocks",{'employee_rut'=> employee_rut},{'api.tilt.root' => rabl_root}
 
       last_response.status.should == Rack::Utils.status_code(:created)
